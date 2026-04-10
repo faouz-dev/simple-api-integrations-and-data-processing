@@ -6,22 +6,25 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: "*", allowedHeaders: ["GET"] }));
 
-app.get("/api/classify", apiKeyHandler, (req, res) => {
+app.get("/api/classify", async (req, res) => {
   try {
-    const { gender, probability, count: sample_size, name } = req.query;
+    const { name } = req.query;
     const isoDate = new Date(Date.now()).toISOString();
 
-    if (!name)
+    if (!name || typeof name !== "string" || name.length == 0)
       return res.status(400).json({
         status: "error",
-        message: "Bad Request",
+        message: "name must be a string",
       });
 
-    if (typeof name !== "string" || name.length == 0)
-      return res.status(402).json({
+    const response = await fetch("https://api.genderize.io?name=" + name);
+    if (!response.ok)
+      return res.status(500).json({
         status: "error",
-        message: "Unprocessable Entity",
+        message: "No prediction available for the provided name",
       });
+
+    const { gender, count: sample_size, probability } = await response.json();
 
     if (!gender || !sample_size || sample_size == 0)
       return res.status(400).json({

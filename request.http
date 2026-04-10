@@ -1,14 +1,11 @@
 ### test good query
-GET http://localhost:3000/api/classify?name=Andre&gender=male&probability=0.99&count=1234&apikey=test-api-key
+GET http://localhost:3000/api/classify?name=faouzane
 Content-Type: application/json
 
 
 
 ### test bas request
-GET http://localhost:3000/api/classify?gender=male&probability=0.99&count=1234&apikey=test-api-key
+GET http://localhost:3000/api/classify
 Content-Type: application/json
 
 
-### test no apikey
-GET http://localhost:3000/api/classify?name=Andre&gender=male&probability=0.99&count=1234
-Content-Type: application/json

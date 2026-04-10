@@ -1,6 +1,7 @@
-const apikey = "test-api-key";
+const apikey = "api-key-example";
 
 /**
+ *Example of adding apikey verifications
  *
  * @param {import("express").Request} req
  * @param {import("express").Response} res
