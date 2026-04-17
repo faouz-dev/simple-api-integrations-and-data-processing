@@ -43,6 +43,7 @@ function classifyAgeGroup(age) {
 async function fetchAPI(url, apiName) {
   const response = await fetch(url);
   if (!response.ok) {
+    console.log(response.body);
     throw new Error(`${apiName} API error`);
   }
   return response.json();
