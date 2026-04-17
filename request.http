@@ -1,11 +1,43 @@
-### test good query
-GET http://localhost:3000/api/classify?name=faouzane
+### POST /api/profiles - Create a new profile
+POST http://localhost:3000/api/profiles
 Content-Type: application/json
 
+{
+  "name": "ella"
+}
 
-
-### test bas request
-GET http://localhost:3000/api/classify
+### POST /api/profiles - Test idempotency (same name)
+POST http://localhost:3000/api/profiles
 Content-Type: application/json
+
+{
+  "name": "ella"
+}
+
+### GET /api/profiles/{id} - Get profile by ID (replace {id} with actual ID)
+GET http://localhost:3000/api/profiles/{}
+
+### GET /api/profiles - Get all profiles
+GET http://localhost:3000/api/profiles
+
+### GET /api/profiles - Get profiles with filters
+GET http://localhost:3000/api/profiles?gender=female&country_id=US
+
+### DELETE /api/profiles/{id} - Delete profile by ID (replace {id} with actual ID)
+DELETE http://localhost:3000/api/profiles/{id}
+
+### Test bad request - Missing name
+POST http://localhost:3000/api/profiles
+Content-Type: application/json
+
+{}
+
+### Test bad request - Empty name
+POST http://localhost:3000/api/profiles
+Content-Type: application/json
+
+{
+  "name": ""
+}
 
 
